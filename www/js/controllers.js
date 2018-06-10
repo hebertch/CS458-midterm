@@ -18,6 +18,7 @@ angular.module('userApp.controllers', [])
      
         $scope.selectedType = 'Words';
         $scope.selectedFile = 'teacher';
+        $scope.selectedChartType = 'Bubble';
 
         $scope.submit = function () {
             uploadFile();
