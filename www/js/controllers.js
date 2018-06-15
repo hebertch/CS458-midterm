@@ -311,19 +311,21 @@ angular.module('userApp.controllers', [])
 	Canvas = document.getElementById('canvas');
 	setup_canvas_context();
 
+       getData();
         $scope.name = '';
         $scope.fileName = null;
-        $scope.files = [{
-                name: 'Teachers',
-                wordcount: 8516,
-                value: 'teacher'
-            },
-            {
-                name: 'Rosetta',
-                wordcount: 9384,
-                value: 'rosetta'
-            }
-        ];
+        $scope.files = [];
+        // [{
+        //         name: 'Teachers',
+        //         wordcount: 8516,
+        //         value: 'teacher'
+        //     },
+        //     {
+        //         name: 'Rosetta',
+        //         wordcount: 9384,
+        //         value: 'rosetta'
+        //     }
+        // ];
         toastr.options = {
             "positionClass": "toast-bottom-right",
             "preventDuplicates": true,
@@ -337,6 +339,7 @@ angular.module('userApp.controllers', [])
         }
         var flag = false;
         $scope.updateVisual = function (data) {
+            console.log($scope.files);
             // var parent = document.getElementById("main");
             if (flag) {
                 document.getElementById("svg_id").innerHTML = '';
@@ -473,4 +476,25 @@ angular.module('userApp.controllers', [])
                   .style("background-color", color);
             }
         }
+
+        function getData() {
+            return new Promise((resolve, reject) => {
+                var data = fileService.get()
+                setTimeout(function() {
+                    console.log($scope.files);
+                    $scope.files = data.value.data
+                    // console.log(data.value.data);
+                    console.log($scope.files);
+                    
+                    resolve( data.value.data);
+                }, 800);
+                // 
+                // console.log(data);
+                // resolve(data);
+                
+            });
+           
+            
+        }
+
     });
